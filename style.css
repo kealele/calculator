@@ -38,11 +38,13 @@ body {
     flex-direction: row;
 }
 
-.button {
+button {
+    font-size: 50px;
     box-sizing: border-box;
     width: 100px;
+    height: 100px;
     text-align: center;
-    background-color: lightgray;
+    background-color: rgb(255, 255, 255);
     border: 5px solid black;
     border-radius: 10px;
 }
@@ -56,6 +58,6 @@ body {
     color: white;
 }
 
-.doubleWidth {
+.bigWidth {
     flex: 2;
 }

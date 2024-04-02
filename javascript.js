@@ -34,3 +34,17 @@ function operate (operator) {
         divide();
     }
 }
+
+const buttons = document.querySelectorAll("button");
+let arrResult = [];
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      let x = button.value;
+      arrResult.push(x);
+      if (arrResult.length > 12){
+        document.querySelector(".result").style.fontSize = "28px";
+      }
+      document.querySelector(".result").textContent = +arrResult.join('');
+    });
+  });
