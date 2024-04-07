@@ -2,8 +2,34 @@ let firstNumber;
 let secondNumber;
 let operator;
 
+const numberButtons = document.querySelectorAll(".number");
+let result = document.querySelector('.result');
+let arrResult = [];
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      let x = button.value;
+      arrResult.push(x);
+      if (arrResult.length > 12){
+        result.style.fontSize = "28px";
+      }
+      result.textContent = arrResult.join('');
+    });
+});
+
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", () => {
+    if (firstNumber === undefined) {
+        firstNumber = parseFloat(result.textContent);
+        arrResult = []; 
+        result.textContent = ""; 
+    } else {
+        secondNumber = parseFloat(result.textContent);
+    }
+});
+
 function add () {
-	console.log(+firstNumber + +secondNumber);
+    console.log(firstNumber + secondNumber);
 };
 
 function subtract () {
@@ -20,10 +46,6 @@ function divide () {
 
 function operate (operator) {
 
-    firstNumber = prompt("First Number");
-    secondNumber = prompt("Second Number");
-    operator = prompt("Operator");
-
     if (operator == "+"){
         add();
     } else if (operator == "-"){
@@ -34,17 +56,3 @@ function operate (operator) {
         divide();
     }
 }
-
-const buttons = document.querySelectorAll("button");
-let arrResult = [];
-
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      let x = button.value;
-      arrResult.push(x);
-      if (arrResult.length > 12){
-        document.querySelector(".result").style.fontSize = "28px";
-      }
-      document.querySelector(".result").textContent = +arrResult.join('');
-    });
-  });
