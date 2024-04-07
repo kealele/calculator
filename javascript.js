@@ -22,9 +22,14 @@ addButton.addEventListener("click", () => {
     if (firstNumber === undefined) {
         firstNumber = parseFloat(result.textContent);
         arrResult = []; 
-        result.textContent = ""; 
-    } else {
+    } else if (secondNumber === undefined) {
         secondNumber = parseFloat(result.textContent);
+        arrResult = []
+        if (firstNumber !== undefined && secondNumber !== undefined) {
+            result.textContent = firstNumber + secondNumber;
+            firstNumber = parseFloat(result.textContent);
+            secondNumber = undefined;
+        }
     }
 });
 
