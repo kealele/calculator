@@ -2,6 +2,14 @@ let firstNumber;
 let secondNumber;
 let operator;
 
+const AC = document.querySelector(".AC")
+AC.addEventListener("click", () => {
+    firstNumber = undefined;
+    secondNumber = undefined;
+    arrResult = [];
+    result.textContent = 0;
+});
+
 const numberButtons = document.querySelectorAll(".number");
 let result = document.querySelector('.result');
 let arrResult = [];
