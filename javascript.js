@@ -14,17 +14,38 @@ numberButtons.forEach((button) => {
         result.style.fontSize = "28px";
       }
       result.textContent = arrResult.join('');
+      if (firstNumber !== undefined && secondNumber === undefined) {
+        secondNumber = parseFloat(result.textContent);
+        arrResult = []}
     });
 });
 
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", () => {
-    if (firstNumber === undefined) {
+    if (operator === undefined){
+        operator = '+'
+    } else if (operator == "-"){
+        result.textContent = firstNumber - secondNumber;
         firstNumber = parseFloat(result.textContent);
-        arrResult = []; 
-    } else if (secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []
+        secondNumber = undefined;
+        return operator = "+"
+    } else if (operator == "*"){
+        result.textContent = firstNumber * secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "+"
+    } else if (operator == "/"){
+        result.textContent = firstNumber / secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "+"
+    }
+    
+    if (operator == "+"){
+        if (firstNumber === undefined) {
+            firstNumber = parseFloat(result.textContent);
+            arrResult = []; 
+        }
         if (firstNumber !== undefined && secondNumber !== undefined) {
             result.textContent = firstNumber + secondNumber;
             firstNumber = parseFloat(result.textContent);
@@ -33,31 +54,157 @@ addButton.addEventListener("click", () => {
     }
 });
 
+const subtractButton = document.querySelector(".subtract");
+subtractButton.addEventListener("click", () => {
+    if (operator === undefined){
+        operator = '-'
+    } else if (operator == "+"){
+        result.textContent = firstNumber + secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "-"
+    } else if (operator == "*"){
+        result.textContent = firstNumber * secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "-"
+    } else if (operator == "/"){
+        result.textContent = firstNumber / secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "-"
+    }
+    
+    if (operator == "-"){
+        if (firstNumber === undefined) {
+            firstNumber = parseFloat(result.textContent);
+            arrResult = []; 
+        }
+        if (firstNumber !== undefined && secondNumber !== undefined) {
+            result.textContent = firstNumber - secondNumber;
+            firstNumber = parseFloat(result.textContent);
+            secondNumber = undefined;
+        }
+    }
+});
+
+const multiplyButton = document.querySelector(".multiply");
+multiplyButton.addEventListener("click", () => {
+    if (operator === undefined){
+        operator = '*'
+    } else if (operator == "-"){
+        result.textContent = firstNumber - secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "*"
+    } else if (operator == "+"){
+        result.textContent = firstNumber + secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "*"
+    } else if (operator == "/"){
+        result.textContent = firstNumber / secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "*"
+    }
+    
+    if (operator == "*"){
+        if (firstNumber === undefined) {
+            firstNumber = parseFloat(result.textContent);
+            arrResult = []; 
+        }
+        if (firstNumber !== undefined && secondNumber !== undefined) {
+            result.textContent = firstNumber * secondNumber;
+            firstNumber = parseFloat(result.textContent);
+            secondNumber = undefined;
+        }
+    }
+});
+
+const divideButton = document.querySelector(".divide");
+divideButton.addEventListener("click", () => {
+    if (operator === undefined){
+        operator = '/'
+    } else if (operator == "-"){
+        result.textContent = firstNumber - secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "/"
+    } else if (operator == "*"){
+        result.textContent = firstNumber * secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "/"
+    } else if (operator == "+"){
+        result.textContent = firstNumber + secondNumber;
+        firstNumber = parseFloat(result.textContent);
+        secondNumber = undefined;
+        return operator = "/"
+    }
+    
+    if (operator == "/"){
+        if (firstNumber === undefined) {
+            firstNumber = parseFloat(result.textContent);
+            arrResult = []; 
+        }
+        if (firstNumber !== undefined && secondNumber !== undefined) {
+            result.textContent = firstNumber / secondNumber;
+            firstNumber = parseFloat(result.textContent);
+            secondNumber = undefined;
+        }
+    }
+});
+
+const equalButton = document.querySelector(".equal")
+equalButton.addEventListener("click", () => {
+    if (operator == "+"){
+        add();
+        operator = undefined;
+    } else if (operator == "-"){
+        subtract();
+        operator = undefined;
+    } else if (operator == "*"){
+        multiply();
+        operator = undefined;
+    } else if (operator == "/"){
+        divide();
+        operator = undefined;
+    }
+});
+
 function add () {
-    console.log(firstNumber + secondNumber);
+    if (secondNumber === undefined) {
+        secondNumber = parseFloat(result.textContent);
+        arrResult = []}
+    result.textContent = firstNumber + secondNumber;
+    firstNumber = parseFloat(result.textContent);
+    secondNumber = undefined;
 };
 
 function subtract () {
-    console.log(+firstNumber - +secondNumber);
+    if (secondNumber === undefined) {
+        secondNumber = parseFloat(result.textContent);
+        arrResult = []}
+    result.textContent = firstNumber - secondNumber;
+    firstNumber = parseFloat(result.textContent);
+    secondNumber = undefined;
 };
 
 function multiply () {
-	console.log(+firstNumber * +secondNumber);
+    if (secondNumber === undefined) {
+        secondNumber = parseFloat(result.textContent);
+        arrResult = []}
+    result.textContent = firstNumber * secondNumber;
+    firstNumber = parseFloat(result.textContent);
+    secondNumber = undefined;
 };
 
 function divide () {
-    console.log(+firstNumber / +secondNumber);
+    if (secondNumber === undefined) {
+        secondNumber = parseFloat(result.textContent);
+        arrResult = []}
+    result.textContent = firstNumber / secondNumber;
+    firstNumber = parseFloat(result.textContent);
+    secondNumber = undefined;
 };
-
-function operate (operator) {
-
-    if (operator == "+"){
-        add();
-    } else if (operator == "-"){
-        subtract();
-    } else if (operator == "*"){
-        multiply();
-    } else if (operator == "/"){
-        divide();
-    }
-}
