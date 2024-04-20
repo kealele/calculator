@@ -2,7 +2,7 @@ let firstNumber;
 let secondNumber;
 let operator;
 let arrResult = [];
-
+const maxLength = 12;
 
 const AC = document.querySelector(".AC")
 AC.addEventListener("click", () => {
@@ -23,14 +23,12 @@ let result = document.querySelector('.result');
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         let x = button.value;
-        arrResult.push(x);
-        if (arrResult.length > 12) {
-            result.style.fontSize = "28px";
+        if (arrResult.length < maxLength) {
+            arrResult.push(x);
+            result.textContent = arrResult.join('');
         }
-        result.textContent = arrResult.join('');
     });
 });
-
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -49,7 +47,7 @@ operatorButtons.forEach((button) => {
 
 const equalButton = document.querySelector(".equal")
 equalButton.addEventListener("click", () => {
-    pointButton.removeAttribute('disabled');
+    
     secondNumber = parseFloat(arrResult.join(''));
     arrResult = [];
     performOperation();
@@ -58,20 +56,30 @@ equalButton.addEventListener("click", () => {
 function performOperation() {
 
     if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+
         if (operator === '/' && secondNumber === 0) {
             result.textContent = "Error: Division by zero";
         } else {
+            let operationResult;
             if (operator === '+') {
-                result.textContent = firstNumber + secondNumber;
+                operationResult = firstNumber + secondNumber;
             } else if (operator === '-') {
-                result.textContent = firstNumber - secondNumber;
+                operationResult = firstNumber - secondNumber;
             } else if (operator === '*') {
-                result.textContent = firstNumber * secondNumber;
+                operationResult = firstNumber * secondNumber;
             } else if (operator === '/') {
-                result.textContent = firstNumber / secondNumber;
+                operationResult = firstNumber / secondNumber;
             }
+
+            let resultString = String(operationResult);
+            if (resultString.length > maxLength) {
+                resultString = resultString.substring(0, maxLength);
+            }
+
+            result.textContent = resultString;
             firstNumber = parseFloat(result.textContent);
         }
     } 
     secondNumber = undefined;
+    
 }
