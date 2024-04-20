@@ -3,12 +3,18 @@ let secondNumber;
 let operator;
 let arrResult = [];
 
+
 const AC = document.querySelector(".AC")
 AC.addEventListener("click", () => {
     firstNumber = undefined;
     secondNumber = undefined;
     arrResult = [];
     result.textContent = 0;
+});
+
+const pointButton = document.querySelector(".point")
+pointButton.addEventListener("click", () => {
+    pointButton.setAttribute('disabled', true);
 });
 
 const numberButtons = document.querySelectorAll(".number");
@@ -26,9 +32,9 @@ numberButtons.forEach((button) => {
 });
 
 const operatorButtons = document.querySelectorAll(".operator");
-
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        pointButton.removeAttribute('disabled');
         if (firstNumber === undefined) {
             firstNumber = parseFloat(arrResult.join(''));
             arrResult = [];
@@ -43,6 +49,7 @@ operatorButtons.forEach((button) => {
 
 const equalButton = document.querySelector(".equal")
 equalButton.addEventListener("click", () => {
+    pointButton.removeAttribute('disabled');
     secondNumber = parseFloat(arrResult.join(''));
     arrResult = [];
     performOperation();
