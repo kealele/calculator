@@ -1,6 +1,7 @@
 let firstNumber;
 let secondNumber;
 let operator;
+let arrResult = [];
 
 const AC = document.querySelector(".AC")
 AC.addEventListener("click", () => {
@@ -12,207 +13,58 @@ AC.addEventListener("click", () => {
 
 const numberButtons = document.querySelectorAll(".number");
 let result = document.querySelector('.result');
-let arrResult = [];
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      let x = button.value;
-      arrResult.push(x);
-      if (arrResult.length > 12){
-        result.style.fontSize = "28px";
-      }
-      result.textContent = arrResult.join('');
-      if (firstNumber !== undefined && secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []}
+        let x = button.value;
+        arrResult.push(x);
+        if (arrResult.length > 12) {
+            result.style.fontSize = "28px";
+        }
+        result.textContent = arrResult.join('');
     });
 });
 
-const addButton = document.querySelector(".add");
-addButton.addEventListener("click", () => {
-    if (operator === undefined){
-        operator = '+'
-    } else if (operator == "-"){
-        result.textContent = firstNumber - secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "+"
-    } else if (operator == "*"){
-        result.textContent = firstNumber * secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "+"
-    } else if (operator == "/"){
-        result.textContent = firstNumber / secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "+"
-    }
-    
-    if (operator == "+"){
-        if (firstNumber === undefined) {
-            firstNumber = parseFloat(result.textContent);
-            arrResult = []; 
-        }
-        if (firstNumber !== undefined && secondNumber !== undefined) {
-            result.textContent = firstNumber + secondNumber;
-            firstNumber = parseFloat(result.textContent);
-            secondNumber = undefined;
-        }
-    }
-});
+const operatorButtons = document.querySelectorAll(".operator");
 
-const subtractButton = document.querySelector(".subtract");
-subtractButton.addEventListener("click", () => {
-    if (operator === undefined){
-        operator = '-'
-    } else if (operator == "+"){
-        result.textContent = firstNumber + secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "-"
-    } else if (operator == "*"){
-        result.textContent = firstNumber * secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "-"
-    } else if (operator == "/"){
-        result.textContent = firstNumber / secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "-"
-    }
-    
-    if (operator == "-"){
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
         if (firstNumber === undefined) {
-            firstNumber = parseFloat(result.textContent);
-            arrResult = []; 
+            firstNumber = parseFloat(arrResult.join(''));
+            arrResult = [];
+        } else {
+            secondNumber = parseFloat(arrResult.join(''));
+            arrResult = [];
+            performOperation();
         }
-        if (firstNumber !== undefined && secondNumber !== undefined) {
-            result.textContent = firstNumber - secondNumber;
-            firstNumber = parseFloat(result.textContent);
-            secondNumber = undefined;
-        }
-    }
-});
-
-const multiplyButton = document.querySelector(".multiply");
-multiplyButton.addEventListener("click", () => {
-    if (operator === undefined){
-        operator = '*'
-    } else if (operator == "-"){
-        result.textContent = firstNumber - secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "*"
-    } else if (operator == "+"){
-        result.textContent = firstNumber + secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "*"
-    } else if (operator == "/"){
-        result.textContent = firstNumber / secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "*"
-    }
-    
-    if (operator == "*"){
-        if (firstNumber === undefined) {
-            firstNumber = parseFloat(result.textContent);
-            arrResult = []; 
-        }
-        if (firstNumber !== undefined && secondNumber !== undefined) {
-            result.textContent = firstNumber * secondNumber;
-            firstNumber = parseFloat(result.textContent);
-            secondNumber = undefined;
-        }
-    }
-});
-
-const divideButton = document.querySelector(".divide");
-divideButton.addEventListener("click", () => {
-    if (operator === undefined){
-        operator = '/'
-    } else if (operator == "-"){
-        result.textContent = firstNumber - secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "/"
-    } else if (operator == "*"){
-        result.textContent = firstNumber * secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "/"
-    } else if (operator == "+"){
-        result.textContent = firstNumber + secondNumber;
-        firstNumber = parseFloat(result.textContent);
-        secondNumber = undefined;
-        return operator = "/"
-    }
-    
-    if (operator == "/"){
-        if (firstNumber === undefined) {
-            firstNumber = parseFloat(result.textContent);
-            arrResult = []; 
-        }
-        if (firstNumber !== undefined && secondNumber !== undefined) {
-            result.textContent = firstNumber / secondNumber;
-            firstNumber = parseFloat(result.textContent);
-            secondNumber = undefined;
-        }
-    }
+        operator = button.value;
+    });
 });
 
 const equalButton = document.querySelector(".equal")
 equalButton.addEventListener("click", () => {
-    if (operator == "+"){
-        add();
-        operator = undefined;
-    } else if (operator == "-"){
-        subtract();
-        operator = undefined;
-    } else if (operator == "*"){
-        multiply();
-        operator = undefined;
-    } else if (operator == "/"){
-        divide();
-        operator = undefined;
-    }
+    secondNumber = parseFloat(arrResult.join(''));
+    arrResult = [];
+    performOperation();
 });
 
-function add () {
-    if (secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []}
-    result.textContent = firstNumber + secondNumber;
-    firstNumber = parseFloat(result.textContent);
-    secondNumber = undefined;
-};
+function performOperation() {
 
-function subtract () {
-    if (secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []}
-    result.textContent = firstNumber - secondNumber;
-    firstNumber = parseFloat(result.textContent);
+    if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+        if (operator === '/' && secondNumber === 0) {
+            result.textContent = "Error: Division by zero";
+        } else {
+            if (operator === '+') {
+                result.textContent = firstNumber + secondNumber;
+            } else if (operator === '-') {
+                result.textContent = firstNumber - secondNumber;
+            } else if (operator === '*') {
+                result.textContent = firstNumber * secondNumber;
+            } else if (operator === '/') {
+                result.textContent = firstNumber / secondNumber;
+            }
+            firstNumber = parseFloat(result.textContent);
+        }
+    } 
     secondNumber = undefined;
-};
-
-function multiply () {
-    if (secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []}
-    result.textContent = firstNumber * secondNumber;
-    firstNumber = parseFloat(result.textContent);
-    secondNumber = undefined;
-};
-
-function divide () {
-    if (secondNumber === undefined) {
-        secondNumber = parseFloat(result.textContent);
-        arrResult = []}
-    result.textContent = firstNumber / secondNumber;
-    firstNumber = parseFloat(result.textContent);
-    secondNumber = undefined;
-};
+}
