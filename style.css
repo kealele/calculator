@@ -51,12 +51,41 @@ button {
 }
 
 .orange {
-    background-color: rgb(233, 151, 0);
+    background-color: rgb(255, 166, 0);
     color: rgb(0, 0, 0);
 }
+
+.orange:hover {
+    background-color: rgb(253, 181, 46);
+}
+
+.orange:active {
+    background-color: rgb(187, 121, 0);
+}
+
 .darkGray {
     background-color: rgb(43, 43, 43);
     color: white;
+}
+
+.darkGray:hover {
+    background-color: rgb(51, 51, 51);
+}
+
+.darkGray:active {
+    background-color: rgb(26, 26, 26);
+}
+
+.lightGray {
+    background-color: rgb(160, 160, 160);
+}
+
+.lightGray:hover {
+    background-color: rgb(184, 184, 184);
+}
+
+.lightGray:active {
+    background-color: rgb(134, 134, 134);
 }
 
 .bigWidth {
