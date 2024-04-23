@@ -10,6 +10,7 @@ AC.addEventListener("click", () => {
     secondNumber = undefined;
     arrResult = [];
     result.textContent = 0;
+    pointButton.removeAttribute('disabled');
 });
 
 const pointButton = document.querySelector(".point")
@@ -61,6 +62,7 @@ function performOperation() {
             result.textContent = "Error: Division by zero";
         } else {
             let operationResult;
+            let roundedResult;
             if (operator === '+') {
                 operationResult = firstNumber + secondNumber;
             } else if (operator === '-') {
@@ -71,7 +73,9 @@ function performOperation() {
                 operationResult = firstNumber / secondNumber;
             }
 
-            let resultString = String(operationResult);
+            roundedResult = Math.round(operationResult * 100) / 100;
+
+            let resultString = String(roundedResult);
             if (resultString.length > maxLength) {
                 resultString = resultString.substring(0, maxLength);
             }
